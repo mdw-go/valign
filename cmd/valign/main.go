@@ -17,7 +17,9 @@ func main() {
 	var lines []string
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
+		line := scanner.Text()
+		lines = append(lines, line)
+		_, _ = fmt.Fprintln(os.Stderr, line)
 	}
 	err := scanner.Err()
 	if err != nil {
