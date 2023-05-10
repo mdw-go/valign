@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/mdwhatcott/valign"
 )
@@ -18,7 +19,7 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
 		line := scanner.Text()
-		lines = append(lines, line)
+		lines = append(lines, strings.ReplaceAll(line, "\t", " "))
 		_, _ = fmt.Fprintln(os.Stderr, line)
 	}
 	err := scanner.Err()
