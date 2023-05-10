@@ -12,9 +12,6 @@ import (
 
 func main() {
 	log.SetFlags(log.Ltime | log.Lshortfile)
-
-	var match string
-	flag.StringVar(&match, "match", "", "What to align on.")
 	flag.Parse()
 
 	var lines []string
@@ -26,8 +23,10 @@ func main() {
 	if err != nil {
 		log.Fatal("read err:", err)
 	}
-
-	for _, line := range valign.On(match, lines...) {
+	for _, match := range flag.Args() {
+		lines = valign.On(match, lines...)
+	}
+	for _, line := range lines {
 		fmt.Println(line)
 	}
 }
