@@ -1,4 +1,4 @@
-module github.com/mdwhatcott/valign
+module github.com/mdwhatcott/valign/v2
 
 go 1.21
 

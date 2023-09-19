@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/mdwhatcott/valign"
+	"github.com/mdwhatcott/valign/v2"
 )
 
 var Version = "dev"
@@ -48,11 +48,7 @@ func main() {
 	}
 
 	if config.Blocks {
-		blocks := valign.Blocks(config.Match, lines...)
-		lines = nil
-		for _, block := range blocks {
-			lines = append(lines, valign.On(config.Match, block...)...)
-		}
+		lines = valign.Blocks(config.Match, lines...)
 	} else {
 		lines = valign.On(config.Match, lines...)
 	}

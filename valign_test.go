@@ -35,18 +35,12 @@ func TestSplitBlocks(t *testing.T) {
 			"SELECT 'goodbye' FROM table;",
 			"SELECT 'really-super-long-name' FROM table;",
 		),
-		should.Equal, [][]string{
-			{
-				"SELECT 'a' FROM table;",
-				"SELECT 'hello' FROM table;",
-			},
-			{
-				"I'm a special snowflake",
-			},
-			{
-				"SELECT 'goodbye' FROM table;",
-				"SELECT 'really-super-long-name' FROM table;",
-			},
+		should.Equal, []string{
+			"SELECT 'a'     FROM table;",
+			"SELECT 'hello' FROM table;",
+			"I'm a special snowflake",
+			"SELECT 'goodbye'                FROM table;",
+			"SELECT 'really-super-long-name' FROM table;",
 		},
 	)
 }
