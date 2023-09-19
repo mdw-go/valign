@@ -6,14 +6,24 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/mdwhatcott/valign"
 )
 
+var Version = "dev"
+
 func main() {
 	log.SetFlags(log.Ltime | log.Lshortfile)
-	flag.Parse()
+	flags := flag.NewFlagSet(fmt.Sprintf("%s @ %s", filepath.Base(os.Args[0]), Version), flag.ExitOnError)
+	flags.Usage = func() {
+		_, _ = fmt.Fprintln(flags.Output(), ""+
+			"This program accepts input text from stdin and non-flag command-line arguments and "+
+			"vertically aligns matches to command-line flags in the input text.")
+		flags.PrintDefaults()
+	}
+	_ = flags.Parse(os.Args[1:])
 
 	var lines []string
 	scanner := bufio.NewScanner(os.Stdin)
@@ -26,7 +36,7 @@ func main() {
 	if err != nil {
 		log.Fatal("read err:", err)
 	}
-	for _, match := range flag.Args() {
+	for _, match := range flags.Args() {
 		lines = valign.On(match, lines...)
 	}
 	for _, line := range lines {
