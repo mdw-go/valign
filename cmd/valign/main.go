@@ -37,9 +37,7 @@ func main() {
 	var lines []string
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
-		line := scanner.Text()
-		lines = append(lines, strings.ReplaceAll(line, "\t", " "))
-		_, _ = fmt.Fprintln(os.Stderr, line)
+		lines = append(lines, strings.ReplaceAll(scanner.Text(), "\t", " "))
 	}
 	err := scanner.Err()
 	if err != nil {
