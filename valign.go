@@ -24,3 +24,23 @@ func On(search string, lines ...string) (result []string) {
 	}
 	return result
 }
+
+func Blocks(match string, lines ...string) (results [][]string) {
+	if len(lines) == 0 {
+		return results
+	}
+	matching := strings.Contains(lines[0], match)
+	block := []string{lines[0]}
+	for _, line := range lines[1:] {
+		if strings.Contains(line, match) != matching {
+			results = append(results, block)
+			block = make([]string, 0, 0)
+			matching = !matching
+		}
+		block = append(block, line)
+	}
+	if len(block) > 0 {
+		results = append(results, block)
+	}
+	return results
+}
