@@ -47,18 +47,14 @@ func main() {
 		log.Fatal("read err:", err)
 	}
 
-	matches := flags.Args()
-
 	if config.Blocks {
-		blocks := valign.Blocks(matches[0], lines...)
+		blocks := valign.Blocks(config.Match, lines...)
 		lines = nil
 		for _, block := range blocks {
-			lines = append(lines, valign.On(matches[0], block...)...)
+			lines = append(lines, valign.On(config.Match, block...)...)
 		}
 	} else {
-		for _, match := range matches {
-			lines = valign.On(match, lines...)
-		}
+		lines = valign.On(config.Match, lines...)
 	}
 	for _, line := range lines {
 		fmt.Println(line)
