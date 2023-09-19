@@ -25,8 +25,7 @@ func main() {
 	flags := flag.NewFlagSet(fmt.Sprintf("%s @ %s", filepath.Base(os.Args[0]), Version), flag.ExitOnError)
 	flags.StringVar(&config.Match, "match", "", "The value to match when vertically aligning the input text.")
 	flags.BoolVar(&config.Blocks, "blocks", false, ""+
-		"When set, only consider the first non-flag command-line argument for matching, and "+
-		"treat each block of contiguous matching lines as separate blocks.")
+		"When set, treat each block of contiguous matching lines as separate blocks.")
 	flags.Usage = func() {
 		_, _ = fmt.Fprintln(flags.Output(), ""+
 			"This program accepts input text from stdin and command-line arguments to "+
