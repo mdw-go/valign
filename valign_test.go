@@ -3,7 +3,7 @@ package valign
 import (
 	"testing"
 
-	"github.com/mdwhatcott/testing/should"
+	"github.com/mdw-go/testing/should"
 )
 
 func TestOn(t *testing.T) {

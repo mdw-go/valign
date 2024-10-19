@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/mdwhatcott/valign/v2"
+	"github.com/mdw-go/valign/v2"
 )
 
 var Version = "dev"
